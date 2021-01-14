@@ -22,8 +22,8 @@ const responsive = {
 };
 
 const products = ['200', '200', '200', '200', '200', '200', '200', '200'];
-const productList = products.map((e)=>{
-  return <ProductItem price={e} />;
+const productList = products.map((e,i)=>{
+  return <ProductItem key={i} price={e} />;
 });
 
 const CarouselP = ()=>{
