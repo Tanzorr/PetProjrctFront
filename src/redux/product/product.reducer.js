@@ -50,6 +50,8 @@ export const getSingleProduct =(id)=>{
 }
 
 
-
+const mapStateToProps = state => ({
+    products: state.product.products
+});
 
 export default productReducer;
