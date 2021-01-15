@@ -2,31 +2,35 @@ let domen = 'https://fakestoreapi.com/';
 const Api = {
 
     getAll: (items = 'products') => {
-        fetch(`${domen}${items}`)
+        return fetch(`${domen}${items}`)
             .then(res => res.json())
-            .then(json => console.log(json))
+            .then(json => {
+                return json
+            }).then()
     },
 
     getSingle: (items = 'products', id = '1') => {
-        fetch(`${domen}${items}/${id}`)
+        return fetch(`${domen}${items}/${id}`)
             .then(res => res.json())
-            .then(json => console.log(json))
+            .then(json => {
+                return json
+            });
     },
 
     getLimit: (items = 'products', limit = '5') => {
-        fetch(`${domen}${items}?limit=${limit}`)
+        return fetch(`${domen}${items}?limit=${limit}`)
             .then(res => res.json())
             .then(json => console.log(json))
     },
 
     getSort: (items = 'prducts', sort = 'desc') => {
-        fetch(`${domen}${items}?sort=${sort}`)
+        return fetch(`${domen}${items}?sort=${sort}`)
             .then(res => res.json())
             .then(json => console.log(json))
     },
 
     addNew: (items = 'products', product = {}) => {
-        fetch(`${domen}${items}`, {
+        return fetch(`${domen}${items}`, {
             method: "POST",
             body: JSON.stringify(product)
         })
@@ -35,7 +39,7 @@ const Api = {
     },
 
     updateItem: (items = 'products', id, product = {}) => {
-        fetch(`${domen}${items}/${id}`, {
+        return fetch(`${domen}${items}/${id}`, {
             method: "PUT",
             body: JSON.stringify(product)
         })
@@ -45,7 +49,7 @@ const Api = {
 
 
     deleteItem: (items = 'products', id) => {
-        fetch(`${domen}${items}/${id}`, {
+        return fetch(`${domen}${items}/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

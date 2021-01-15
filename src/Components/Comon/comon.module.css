@@ -8,3 +8,8 @@
 .product_item a:hover {
     text-decoration: none;
 }
+
+.product_item img{
+    max-width: 200px;
+    max-height: 250px;
+}
