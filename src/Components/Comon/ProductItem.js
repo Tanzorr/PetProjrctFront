@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import './comon.module.css'
 
 const ProductItem = ({product}) => {
-
+    console.log('products',product)
     return <div className="product_item mb-5">
         <NavLink to={`/product/${product.id}`}>
             <div className="row">
