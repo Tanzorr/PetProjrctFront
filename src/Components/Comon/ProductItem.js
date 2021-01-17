@@ -6,7 +6,7 @@ const ProductItem = ({product}) => {
     console.log('product', product);
     return <div className="product_item mb-5">
             <NavLink to={`/product/${product.id}`}>
-                <div className="row">
+                <div className="row text-center">
                     <img className="img-rounded w-100 item_img"
                          src={product.image}
                          alt=""/>

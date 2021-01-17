@@ -6,6 +6,7 @@ import {NavLink} from "react-router-dom";
 const editProduct = ({...props, product, getSingleProduct, editProductSingle}) => {
 
     let productId = props.match.params.id;
+    let [prod , setProduct] = useState(product)
 
     useEffect(() => {
         getSingleProduct( productId);
@@ -15,8 +16,6 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
         const { name, value } = event.target
         setProduct({ ...prod, [name]: value })
     }
-
-    let [prod , setProduct] = useState(product)
     useEffect(()=>{
         setProduct(product)
     },[product])

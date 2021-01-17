@@ -10,6 +10,7 @@
 }
 
 .product_item img{
-    max-width: 200px;
-    max-height: 250px;
+    margin: 0 auto;
+    max-width:200px;
+    height: 250px;
 }
