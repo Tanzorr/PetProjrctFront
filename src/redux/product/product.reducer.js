@@ -1,12 +1,12 @@
 import Api from "../../api/Api";
 import {ProductActionTypes} from "./product.action.types";
-import {getProduct, getProducts} from "./product.action";
+import {getProduct, getProducts, deleteProduct, addProduct, editPoductAC} from "./product.action";
 
 const INITIAL_STATE = {
     products: [],
     singleProduct: {
         id: 1,
-        category:'',
+        category: '',
         title: 'title',
         price: 100,
         description: "description",
@@ -22,36 +22,73 @@ const productReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 products: action.payload
             }
-            break;
         case ProductActionTypes.GET_SINGLE_PRODUCT:
             return {
                 ...state,
                 singleProduct: action.payload
             }
-            break;
+        case ProductActionTypes.DELETE_PRODUCT:
+            return {
+                ...state,
+                products: [...state.products.filter((e, i) => {
+                    return e.id !== action.payload;
+                })]
+            }
+        case ProductActionTypes.ADD_PRODUCT:
+            return {
+                ...state,
+                products: [state.products, action.payload]
+            }
+        case ProductActionTypes.EDIT_PRODUCT:
+            return {
+                ...state,
+                products: [state.products.map((e,i)=>{
+                    if(e.id === action.id) {
+                        e = action.payload;
+                    }
+                    return e;
+                })]
+            }
         default:
             return state;
     }
 
 }
 
-export const getAllProduct =()=>{
-     return async (dispatch)=>{
+export const getAllProduct = () => {
+    return async (dispatch) => {
         let data = await Api.getAll('products');
         dispatch(getProducts(data));
     }
 }
 
-export const getSingleProduct =(id)=>{
-    return async (dispatch)=>{
-        let data = await Api.getSingle('products',id);
-        dispatch(getProduct(data));
+export const getSingleProduct = (id) => {
+    return async (dispatch) => {
+        let data = await Api.getSingle('products', id);
+         dispatch(getProduct(data));
     }
 }
 
+export const addProductSingle = (product) => {
+    return async (dispatch) => {
+        await Api.addNew('products', product)
+        dispatch(addProduct(product))
+    }
+}
 
-const mapStateToProps = state => ({
-    products: state.product.products
-});
+export const editProductSingle = (productId, productData) => {
+    return async (dispatch) => {
+        await Api.updateItem('products', productId, productData)
+        dispatch(editPoductAC(productData, productId))
+    }
+}
+
+export const delProduct = (id) => {
+    return async (dispatch) => {
+        await Api.deleteItem('products', id);
+        dispatch(deleteProduct(id));
+    }
+}
+
 
 export default productReducer;

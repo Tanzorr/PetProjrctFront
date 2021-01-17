@@ -29,10 +29,14 @@ const CarouselP = ({getAllProduct, products}) => {
         getAllProduct()
     }, [])
 
-
-    const productList = products.map((e, i) => {
-        return <ProductItem key={i} product={e}/>;
-    });
+    let productList=[];
+    if (products && products.length) {
+        productList = products.map((e, i) => {
+            return <ProductItem key={i} product={e}/>;
+        });
+    }else {
+        productList = `<h1> Have no Product</h1> `;
+    }
 
     return <div className="container text-center mt-5 pb-5">
         <Carousel

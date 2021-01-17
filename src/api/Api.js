@@ -44,7 +44,7 @@ const Api = {
             body: JSON.stringify(product)
         })
             .then(res => res.json())
-            .then(json => console.log(json))
+            .then(json => console.log("Updated",json))
     },
 
 
@@ -53,7 +53,7 @@ const Api = {
             method: "DELETE"
         })
             .then(res => res.json())
-            .then(json => console.log(json))
+            .then(json => console.log("delete json",json))
     }
 
 }

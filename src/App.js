@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import {connect} from 'react-redux';
+
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Login from './Components/Pages/Login/Login';
@@ -11,12 +11,14 @@ import HomePage from './Components/Pages/Home/Home';
 import Catalog from './Components/Pages/Catalog/Catalolog';
 import Contact from './Components/Pages/Contact/Contact';
 import Product from './Components/Pages/Product/Product';
-import Api from "./api/Api";
+import Dashboard from "./Components/Pages/Dashboard/DashboardApp";
+import AddProduct from "./Components/Pages/Product/addProduct";
+import EditProduct from "./Components/Pages/Product/editProduct";
 
-import {getProducts} from "./redux/product/product.action";
+
+
 
 const App = ()=>{
-  Api.getAll('products');
   return <div>
     <Router>
       <Header/>
@@ -25,14 +27,15 @@ const App = ()=>{
       <Route path='/contact' exact component={Contact}/>
       <Route path='/login' component={Login}/>
       <Route path='/product/:id' component={Product}/>
+      <Route path='/dashboard' component={Dashboard}/>
+      <Route path='/addProduct' component={AddProduct}/>
+      <Route path='/editProduct/:id' component={EditProduct}/>
       <Footer/>
     </Router>
   </div>;
 };
 
-const mapDispatchToProps = dispatch =>({
-      getProducts: products =>dispatch(getProducts(products))
-})
-export default  connect(null,)(App);
+
+export default  App;
 
 

@@ -3,9 +3,8 @@ import {NavLink} from 'react-router-dom';
 import './comon.module.css'
 
 const ProductItem = ({product}) => {
-    console.log('products',product)
-    if(product){
-        return <div className="product_item mb-5">
+    console.log('product', product);
+    return <div className="product_item mb-5">
             <NavLink to={`/product/${product.id}`}>
                 <div className="row">
                     <img className="img-rounded w-100 item_img"
@@ -25,7 +24,7 @@ const ProductItem = ({product}) => {
                 <button className="btn btn-primary">Add to card</button>
             </div>
         </div>;
-    }
+
 };
 
 
