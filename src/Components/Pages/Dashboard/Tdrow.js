@@ -3,10 +3,7 @@ import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import {delProduct} from '../../../redux/product/product.reducer';
 
-
-
 const TdRow = ({product, delProduct}) => {
-
     return <tr>
         <td>{product.title}</td>
         <td>

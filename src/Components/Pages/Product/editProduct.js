@@ -1,19 +1,15 @@
 import React,{useEffect, useState} from "react";
-
 import {connect} from "react-redux";
 import {getSingleProduct, editProductSingle} from "../../../redux/product/product.reducer";
-
 import {NavLink} from "react-router-dom";
-
 
 const editProduct = ({...props, product, getSingleProduct, editProductSingle}) => {
 
-    let updated =  false;
     let productId = props.match.params.id;
+
     useEffect(() => {
         getSingleProduct( productId);
-
-    }, []);
+        }, []);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
@@ -24,7 +20,6 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
     useEffect(()=>{
         setProduct(product)
     },[product])
-
 
     return <div className="container text-center">
         <div className="row">
@@ -72,9 +67,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                     <button className="ptn btn-success btn-lg"
                             onClick={()=>{
                                 editProductSingle({
-                                    prod
-                                });
-                               // props.history.push('/dashboard')
+                                    prod});
                             }}
                     >Submit</button>
                 </div>
@@ -86,6 +79,5 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
 const mapStateToProps = (state) => {
     return  { product: state.product.singleProduct}
 };
-
 
 export default connect(mapStateToProps, {getSingleProduct, editProductSingle})(editProduct);

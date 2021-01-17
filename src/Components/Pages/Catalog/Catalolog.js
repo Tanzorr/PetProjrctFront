@@ -42,6 +42,4 @@ const mapStateToProps = state =>({
   products:state.product.products
 });
 
-
-
 export default  connect(mapStateToProps,{getAllProduct})(Catalog);

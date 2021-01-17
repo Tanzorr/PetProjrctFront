@@ -23,7 +23,6 @@ const responsive = {
     },
 };
 
-
 const CarouselP = ({getAllProduct, products}) => {
     useEffect(() => {
         getAllProduct()
@@ -59,11 +58,8 @@ const CarouselP = ({getAllProduct, products}) => {
         >
             {productList}
         </Carousel>
-
-
     </div>;
 };
-
 
 const mapStateToProps = state => ({
     products: state.product.products

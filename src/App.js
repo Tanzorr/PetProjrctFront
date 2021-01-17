@@ -15,9 +15,6 @@ import Dashboard from "./Components/Pages/Dashboard/DashboardApp";
 import AddProduct from "./Components/Pages/Product/addProduct";
 import EditProduct from "./Components/Pages/Product/editProduct";
 
-
-
-
 const App = ()=>{
   return <div>
     <Router>
@@ -34,7 +31,6 @@ const App = ()=>{
     </Router>
   </div>;
 };
-
 
 export default  App;
 

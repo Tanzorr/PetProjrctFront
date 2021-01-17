@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {getAllProduct} from "../../../redux/product/product.reducer";
 import {NavLink} from "react-router-dom";
 
-
 const AdminTable=({getAllProduct, products})=>{
     useEffect(()=>{
         getAllProduct()
@@ -17,7 +16,6 @@ const AdminTable=({getAllProduct, products})=>{
     }else{
         productList = '<tr>Have no Products</tr>';
     }
-
 
     return <div>
         <NavLink to={`/addProduct`}className="btn btn-primary m-5">Add Product</NavLink>
@@ -35,7 +33,6 @@ const AdminTable=({getAllProduct, products})=>{
             </tbody>
         </table>
     </div>
-
 }
 
 const mapStateToProps = state =>({

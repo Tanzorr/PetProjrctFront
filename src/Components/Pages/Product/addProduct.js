@@ -5,14 +5,12 @@ import {addProductSingle} from "../../../redux/product/product.reducer";
 
 import {NavLink} from "react-router-dom";
 
-
 const addProduct = ({...props, addProductSingle}) => {
     let [title, setTitle] = useState("");
     let [price, setPrice] = useState("");
     let [image, setImage] = useState("");
     let [category, setCategory] = useState("");
     let [description, setDescription] = useState("");
-
 
     return <div className="container text-center">
         <div className="row">
@@ -75,6 +73,5 @@ const addProduct = ({...props, addProductSingle}) => {
         </div>
     </div>
 }
-
 
 export default connect(null, {addProductSingle})(addProduct);
