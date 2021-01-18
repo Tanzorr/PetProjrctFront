@@ -1,13 +1,22 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {getSingleProduct} from "../../../redux/product/product.reducer";
+import {getSingleProduct, getInCategoriesProducts} from "../../../redux/product/product.reducer";
+import CarouselP from "../../Carusel/CarouselP";
 
-const Product = (props) => {
+const Product = ({...props, product, products, getSingleProduct, getInCategoriesProducts}) => {
     let productId = props.match.params.id;
-    let product = props.product;
+
     useEffect(() => {
-        props.getSingleProduct(productId);
-    }, [])
+        getSingleProduct(productId);
+
+    }, [productId])
+    useEffect(() => {
+        if (product.category) {
+            getInCategoriesProducts(product.category)
+        }
+    }, [product])
+
+
     console.log('product', product, props)
     return <div className="container">
         <div className="row m-5">
@@ -31,11 +40,15 @@ const Product = (props) => {
                 </div>
             </div>
         </div>
+        <div className="row">
+            <CarouselP items={products}/>
+        </div>
     </div>
 }
 
 const mapStateToProps = state => ({
-    product: state.product.singleProduct
+    product: state.product.singleProduct,
+    products: state.product.products,
 });
 
-export default connect(mapStateToProps, {getSingleProduct})(Product);
+export default connect(mapStateToProps, {getSingleProduct, getInCategoriesProducts})(Product);

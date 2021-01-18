@@ -5,6 +5,16 @@ export const getProducts = products => ({
     payload: products
 });
 
+export const getCategoriesAC = categories => ({
+    type: ProductActionTypes.GET_ALL_CATEGORIES,
+    payload: categories
+});
+
+export const getInCategoryAC = products => ({
+    type: ProductActionTypes.GET_IN_CATEGORY,
+    payload: products
+});
+
 export const getProduct = product => ({
     type: ProductActionTypes.GET_SINGLE_PRODUCT,
     payload: product

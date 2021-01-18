@@ -1,9 +1,18 @@
 import Api from "../../api/Api";
 import {ProductActionTypes} from "./product.action.types";
-import {getProduct, getProducts, deleteProduct, addProduct, editPoductAC} from "./product.action";
+import {
+    getProduct,
+    getProducts,
+    deleteProduct,
+    addProduct,
+    editPoductAC,
+    getCategoriesAC,
+    getInCategoryAC
+} from "./product.action";
 
 const INITIAL_STATE = {
     products: [],
+    categories:[],
     singleProduct: {
         id: 1,
         category: '',
@@ -18,6 +27,16 @@ const productReducer = (state = INITIAL_STATE, action) => {
     console.log('action', action);
     switch (action.type) {
         case ProductActionTypes.GET_ALL_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload
+            }
+        case ProductActionTypes.GET_ALL_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
+            }
+        case ProductActionTypes.GET_IN_CATEGORY:
             return {
                 ...state,
                 products: action.payload
@@ -61,6 +80,24 @@ export const getAllProduct = () => {
         dispatch(getProducts(data));
     }
 }
+
+export const getAllCategories = () => {
+    return async (dispatch) => {
+        let data = await Api.getAllCategories('products');
+        dispatch(getCategoriesAC(data));
+    }
+}
+
+export const getInCategoriesProducts = (category  = "") => {
+    if(category === "") {
+        return
+    }
+    return async (dispatch) => {
+        let data = await Api.getInCategories('products', category);
+        dispatch(getInCategoryAC(data));
+    }
+}
+
 
 export const getSingleProduct = (id) => {
     return async (dispatch) => {

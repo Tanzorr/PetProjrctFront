@@ -9,6 +9,23 @@ const Api = {
             }).then()
     },
 
+    getAllCategories:(items = 'products')=>{
+       return  fetch(`${domen}${items}/categories`)
+            .then(res=>res.json())
+            .then(json=> {
+                return json
+            })
+    },
+
+    getInCategories:(items = 'products', category)=>{
+        console.log('category in dal' ,category);
+        return  fetch(`${domen}${items}/category/${category}`)
+            .then(res=>res.json())
+            .then((json) => {
+                return json
+            })
+    },
+
     getSingle: (items = 'products', id = '1') => {
         return fetch(`${domen}${items}/${id}`)
             .then(res => res.json())

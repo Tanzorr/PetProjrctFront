@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductItem from '../Comon/ProductItem';
-import {connect} from 'react-redux';
-import {getAllProduct} from '../../redux/product/product.reducer';
+
 
 const responsive = {
     desktop: {
@@ -23,14 +22,13 @@ const responsive = {
     },
 };
 
-const CarouselP = ({getAllProduct, products}) => {
-    useEffect(() => {
-        getAllProduct()
-    }, [])
+
+const CarouselP = ({items}) => {
 
     let productList=[];
-    if (products && products.length) {
-        productList = products.map((e, i) => {
+
+    if (items && items.length ) {
+        productList = items.map((e, i) => {
             return <ProductItem key={i} product={e}/>;
         });
     }else {
@@ -61,9 +59,5 @@ const CarouselP = ({getAllProduct, products}) => {
     </div>;
 };
 
-const mapStateToProps = state => ({
-    products: state.product.products
-});
-
-export default connect(mapStateToProps, {getAllProduct})(CarouselP);
+export default CarouselP ;
 
