@@ -1,12 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import Baner from '../../Baner/Baner';
 import CarouselP from '../../Carusel/CarouselP';
+import {getAllProduct} from '../../../redux/product/product.reducer';
 
-const Home =()=>{
-  return <div>
-    <Baner/>
-    <CarouselP/>
-  </div>;
+const Home = ({getAllProduct, products}) => {
+    useEffect(() => {
+        getAllProduct('products');
+    }, [])
+
+    return <div>
+        <Baner/>
+        <CarouselP items= {products}/>
+    </div>;
 };
 
-export default Home;
+const mapStateToProps = state => ({
+    products:state.product.products,
+});
+
+export default connect(mapStateToProps, {getAllProduct})(Home);

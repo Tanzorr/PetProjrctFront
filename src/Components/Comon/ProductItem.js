@@ -2,29 +2,28 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import './comon.module.css'
 
-const ProductItem = ({price}) => {
+const ProductItem = ({product}) => {
     return <div className="product_item mb-5">
-        <NavLink to="/product">
+            <NavLink to={`/product/${product.id}`}>
+                <div className="row text-center item_img-block">
+                    <img className="img-rounded w-100 item_img"
+                         src={product.image}
+                         alt=""/>
+                </div>
+                <div className="row ">
+                    <h5 className='text-center pl-5 pr-5 item_title'>{product.title}</h5>
+                </div>
+            </NavLink>
             <div className="row">
-                <img className="img-rounded w-100 "
-                     src="https://cdn.shopify.com/s/files/1/0247/2928/8759/products/DSCF1159_720x.jpg?v=1586085100"
-                     alt=""/>
+                <div className="w-100 text-center">
+                    <b className="price "><h2>{product.price}грн</h2></b>
+                </div>
             </div>
-            <div className="row ">
-                <h5 className='text-center pl-5 pr-5'>Рюкзак-переноска для тварин
-                    (жовтий з дірочками)</h5>
+            <div className="row justify-content-center ">
+                <button className="btn btn-primary">Add to card</button>
             </div>
-        </NavLink>
-        <div className="row">
-            <div className="w-100 text-center">
-                <b className="price "><h2>{price}грн</h2></b>
-            </div>
-        </div>
-        <div className="row justify-content-center ">
-            <button className="btn btn-primary">Add to card</button>
-        </div>
-    </div>;
-};
+        </div>;
 
+};
 
 export default ProductItem;

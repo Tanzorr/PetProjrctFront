@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-
 const Header=()=>{
   return <div className="container">
     <div className="row">
@@ -29,6 +28,9 @@ const Header=()=>{
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/contact">Contact</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
               </li>
 
             </div>

@@ -1,0 +1,78 @@
+let domen = 'https://fakestoreapi.com/';
+const Api = {
+
+    getAll: (items = 'products') => {
+        return fetch(`${domen}${items}`)
+            .then(res => res.json())
+            .then(json => {
+                return json
+            }).then()
+    },
+
+    getAllCategories:(items = 'products')=>{
+       return  fetch(`${domen}${items}/categories`)
+            .then(res=>res.json())
+            .then(json=> {
+                return json
+            })
+    },
+
+    getInCategories:(items = 'products', category)=>{
+        console.log('category in dal' ,category);
+        return  fetch(`${domen}${items}/category/${category}`)
+            .then(res=>res.json())
+            .then((json) => {
+                return json
+            })
+    },
+
+    getSingle: (items = 'products', id = '1') => {
+        return fetch(`${domen}${items}/${id}`)
+            .then(res => res.json())
+            .then(json => {
+                return json
+            });
+    },
+
+    getLimit: (items = 'products', limit = '5') => {
+        return fetch(`${domen}${items}?limit=${limit}`)
+            .then(res => res.json())
+            .then(json => console.log(json))
+    },
+
+    getSort: (items = 'prducts', sort = 'desc') => {
+        return fetch(`${domen}${items}?sort=${sort}`)
+            .then(res => res.json())
+            .then(json => console.log(json))
+    },
+
+    addNew: (items = 'products', product = {}) => {
+        return fetch(`${domen}${items}`, {
+            method: "POST",
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(json => console.log(json))
+    },
+
+    updateItem: (items = 'products', id, product = {}) => {
+        return fetch(`${domen}${items}/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(json => console.log("Updated",json))
+    },
+
+
+    deleteItem: (items = 'products', id) => {
+        return fetch(`${domen}${items}/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(json => console.log("delete json",json))
+    }
+
+}
+
+export default Api;
