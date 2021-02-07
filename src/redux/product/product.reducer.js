@@ -15,10 +15,10 @@ const INITIAL_STATE = {
     categories:[],
     singleProduct: {
         id: 1,
-        category: '',
-        title: 'title',
+        category:'',
+        title: '',
         price: 100,
-        description: "description",
+        description: '',
         img: '',
     }
 }
@@ -108,14 +108,14 @@ export const getSingleProduct = (id) => {
 
 export const addProductSingle = (product) => {
     return async (dispatch) => {
-        await Api.addNew('products', product)
+        await Api.addNew('product', product)
         dispatch(addProduct(product))
     }
 }
 
 export const editProductSingle = (productId, productData) => {
     return async (dispatch) => {
-        await Api.updateItem('products', productId, productData)
+        await Api.updateItem('product', productId, productData)
         dispatch(editPoductAC(productData, productId))
     }
 }

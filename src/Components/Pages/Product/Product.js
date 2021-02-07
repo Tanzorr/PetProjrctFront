@@ -21,7 +21,7 @@ const Product = ({...props, product, products, getSingleProduct, getInCategories
     return <div className="container">
         <div className="row m-5">
             <div className="col-lg-6">
-                <img src={product.image} className="w-75" alt=""/>
+                <img src={product.img} className="w-75" alt=""/>
             </div>
             <div className="col-lg-6">
                 <div className="row">

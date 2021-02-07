@@ -1,8 +1,10 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 const AdminAsade =()=>{
     return <ul>
-                <li><a href="">Products</a></li>
+                <li><NavLink to="/dashboardProd">Products</NavLink></li>
+                <li><NavLink to="/dashboardUser">Users</NavLink></li>
             </ul>
 }
 

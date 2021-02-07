@@ -52,7 +52,7 @@ const addProduct = ({...props, addProductSingle}) => {
                               onChange={(e) => {
                                   setDescription(e.currentTarget.value)
                               }}
-                              className="form-control"></textarea>
+                              className="form-control" required ></textarea>
                 </div>
                 <div className="form-group">
                     <button className="ptn btn-success btn-lg"

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getAllProduct} from "../../../redux/product/product.reducer";
 import {NavLink} from "react-router-dom";
 
-const AdminTable=({getAllProduct, products})=>{
+const ProductsTable=({getAllProduct, products})=>{
     useEffect(()=>{
         getAllProduct()
     },[]);
@@ -39,4 +39,4 @@ const mapStateToProps = state =>({
     products:state.product.products
 });
 
-export default connect(mapStateToProps,{getAllProduct})(AdminTable);
+export default connect(mapStateToProps,{getAllProduct})(ProductsTable);

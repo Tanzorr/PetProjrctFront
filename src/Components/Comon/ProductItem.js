@@ -7,7 +7,7 @@ const ProductItem = ({product}) => {
             <NavLink to={`/product/${product.id}`}>
                 <div className="row text-center item_img-block">
                     <img className="img-rounded w-100 item_img"
-                         src={product.image}
+                         src={product.img}
                          alt=""/>
                 </div>
                 <div className="row ">

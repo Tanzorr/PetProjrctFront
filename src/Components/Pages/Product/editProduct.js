@@ -6,11 +6,12 @@ import {NavLink} from "react-router-dom";
 const editProduct = ({...props, product, getSingleProduct, editProductSingle}) => {
 
     let productId = props.match.params.id;
-    let [prod , setProduct] = useState(product)
+    let [prod , setProduct] = useState( {})
 
     useEffect(() => {
         getSingleProduct( productId);
-        }, []);
+        setProduct(product);
+        }, [productId]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
@@ -29,10 +30,10 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                 <div className="form-group">
                     <label htmlFor="uname"><b>Title</b></label>
                     <input className="form-control"
-                           value={prod.title}
+                           value={prod.name}
                             id="titles"
                            type="text" onChange={handleInputChange}
-                           placeholder="product Title" name="title" required/>
+                           placeholder="product Title" name="name" required/>
                 </div>
                 <div className="form-group">
                     <label><b>Price</b></label>
@@ -45,7 +46,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                     <label><b>Image</b></label>
                     <input className="form-control"
                            onChange={handleInputChange}
-                           value={prod.image}
+                           value={prod.img}
                            type="text" placeholder="Enter image url" name="price" required/>
                 </div>
                 <div className="form-group">
@@ -65,7 +66,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                 <div className="form-group">
                     <button className="ptn btn-success btn-lg"
                             onClick={()=>{
-                                editProductSingle({
+                                editProductSingle(productId,{
                                     prod});
                             }}
                     >Submit</button>
