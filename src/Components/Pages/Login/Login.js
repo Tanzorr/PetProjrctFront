@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Api from "../../../api/Api";
+import  { Redirect } from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
     let [email, setEmail]= useState("");
     let [password, setPassword]= useState("");
 
@@ -31,9 +32,7 @@ const Login = () => {
                                     email,
                                     password
                                 });
-                                setTimeout(()=>{
-                                    location.reload();
-                                }, 1000)
+                                props.history.push('/dashboardUser')
 
                             }
                         } className="btn btn-success" type="submit">Login</button>

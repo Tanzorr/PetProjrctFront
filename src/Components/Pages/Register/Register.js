@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {loginUser, registerUser} from "../../../redux/user/user.reducer";
 import Errors, {chekPassword} from "../../../front_validator/index.";
-;
+import  { Redirect } from 'react-router-dom'
 
-
-const Register = ({registerUser}) => {
+const Register = ({...props,registerUser}) => {
 
     let [name, setName] = useState('');
     let [email, setEmail] = useState('');
@@ -55,6 +54,7 @@ const Register = ({registerUser}) => {
                         });
                         setTimeout(()=>{
                             loginUser({email,password1})
+                            props.history.push('/dashboardUser')
                         },2000)
 
                     }} type="submit">Register

@@ -79,8 +79,17 @@ const Api = {
         }
         return axios.post(`http://127.0.0.1:8000/register`, params, config)
             .then(response => {
-                console.log(response.data)
-            }).catch(error => {
+                console.log('login success', response.data)
+
+            }).then(
+                () =>{
+                    console.log('login after register')
+                    Api.loginUser.getJwtToken(params)
+                    setTimeout(()=>{
+                        location.reload()
+                    },2000);
+                }
+            ).catch(error => {
                 console.log(error);
             })
     },

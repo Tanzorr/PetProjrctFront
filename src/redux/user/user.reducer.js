@@ -66,8 +66,9 @@ export const loginUser = (userData) => {
 
 export const is_Auth = () => {
     return async (dispatch) => {
-        let auth = await Api.is_Longin.getJwtToken();
-        dispatch(isAuthAC(auth))
+        await Api.is_Longin.getJwtToken();
+        let auth = localStorage.getItem("jwt_token");
+        dispatch(isAuthAC(!!auth));
     }
 }
 
