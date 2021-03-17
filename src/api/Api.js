@@ -13,6 +13,7 @@ if (currentDomen !== 'http://localhost:3000/') {
 }
 
 console.log('curretUrl', currentDomen);
+console.log('remote api domen', currentDomen);
 
 const Api = {
     getAll: (items = 'products') => {
