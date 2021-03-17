@@ -18,6 +18,7 @@ console.log('remote api domen', currentDomen);
 let config = {
     headers: {
         'accept': 'application/json',
+        'Access-Control-Allow-Origin': '*'
     }
 }
 
