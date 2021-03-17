@@ -106,9 +106,9 @@ const Api = {
                 () =>{
                     console.log('login after register')
                     Api.loginUser.getJwtToken(params)
-                    setTimeout(()=>{
-                        location.reload()
-                    },2000);
+                    // setTimeout(()=>{
+                    //     location.reload()
+                    // },2000);
                 }
             ).catch(error => {
                 console.log(error);
