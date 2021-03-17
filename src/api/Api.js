@@ -140,7 +140,7 @@ const Api = {
 
     userLogout: () => {
         localStorage.removeItem("jwt_token");
-        location.reload();
+        //location.reload();
     },
 
 
