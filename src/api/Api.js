@@ -1,6 +1,19 @@
 import axios from "axios";
 
 let domen = 'http://127.0.0.1:8000/api/petshop/';
+
+let currentUrl = window.location.href;
+
+currentUrl = currentUrl.split('/')
+
+let currentDomen = currentUrl[2];
+
+if (currentDomen !== 'http://localhost:3000/') {
+    domen = 'https://evening-fjord-08596.herokuapp.com/api/petshop/'
+}
+
+console.log('curretUrl', currentDomen);
+
 const Api = {
     getAll: (items = 'products') => {
         return fetch(`${domen}${items}`)
