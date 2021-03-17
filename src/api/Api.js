@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let domen = 'http://127.0.0.1:8000/api/petshop/';
+let domen = 'http://127.0.0.1:8000/';
 
 let currentUrl = window.location.href;
 
@@ -9,7 +9,7 @@ currentUrl = currentUrl.split('/')
 let currentDomen = currentUrl[2];
 
 if (currentDomen !== 'http://localhost:3000/') {
-    domen = 'https://evening-fjord-08596.herokuapp.com/api/petshop/'
+    domen = 'https://evening-fjord-08596.herokuapp.com/'
 }
 
 console.log('curretUrl', currentDomen);
@@ -24,7 +24,7 @@ let config = {
 
 const Api = {
     getAll: (items = 'products') => {
-        return fetch(`${domen}${items}`, config)
+        return fetch(`${domen}api/petshop/${items}`, config)
             .then(res => res.json())
             .then(json => {
                 return json
@@ -49,7 +49,7 @@ const Api = {
     },
 
     getSingle: (items = 'products', id = '1') => {
-        return fetch(`${domen}${items}/${id}`)
+        return fetch(`${domen}api/petshop/${items}/${id}`)
             .then(res => res.json())
             .then(json => {
                 return json
@@ -57,19 +57,19 @@ const Api = {
     },
 
     getLimit: (items = 'products', limit = '5') => {
-        return fetch(`${domen}${items}?limit=${limit}`)
+        return fetch(`${domen}api/petshop/${items}?limit=${limit}`)
             .then(res => res.json())
             .then(json => console.log(json))
     },
 
     getSort: (items = 'prducts', sort = 'desc') => {
-        return fetch(`${domen}${items}?sort=${sort}`)
+        return fetch(`${domen}api/petshop/${items}?sort=${sort}`)
             .then(res => res.json())
             .then(json => console.log(json))
     },
 
     addNew: (items = 'products', product = {}) => {
-        return fetch(`${domen}${items}/add`, {
+        return fetch(`${domen}api/petshop/${items}/add`, {
             method: "POST",
             body: JSON.stringify(product)
         }).then(res => console.log('res', res))
@@ -78,7 +78,7 @@ const Api = {
 
     updateItem: (items = 'product', id, product = {}) => {
         alert("Put");
-        return axios.put(`${domen}${items}/update/${id}`,
+        return axios.put(`${domen}api/petshop/${items}/update/${id}`,
             {
                 product
             }
@@ -87,7 +87,7 @@ const Api = {
 
 
     deleteItem: (items = 'products', id) => {
-        return fetch(`${domen}${items}/delete/${id}`, {
+        return fetch(`${domen}api/petshop/${items}/delete/${id}`, {
             method: "DELETE"
         }).then(json => console.log("delete json", json))
     },
@@ -98,7 +98,7 @@ const Api = {
                 'accept': 'application/json',
             }
         }
-        return axios.post(`http://127.0.0.1:8000/register`, params, config)
+        return axios.post(`${domen}register`, params, config)
             .then(response => {
                 console.log('login success', response.data)
 
@@ -124,7 +124,7 @@ const Api = {
                 }
             }
 
-            return axios.post(`http://127.0.0.1:8000/authentication_token `, params, config)
+            return axios.post(`${domen}/authentication_token `, params, config)
                 .then(response => {
                     console.log(response.data.token)
                     if (response.data.token) {
