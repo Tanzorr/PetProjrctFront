@@ -15,9 +15,15 @@ if (currentDomen !== 'http://localhost:3000/') {
 console.log('curretUrl', currentDomen);
 console.log('remote api domen', currentDomen);
 
+let config = {
+    headers: {
+        'accept': 'application/json',
+    }
+}
+
 const Api = {
     getAll: (items = 'products') => {
-        return fetch(`${domen}${items}`)
+        return fetch(`${domen}${items}`, config)
             .then(res => res.json())
             .then(json => {
                 return json
