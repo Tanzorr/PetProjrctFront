@@ -124,7 +124,7 @@ const Api = {
                 }
             }
 
-            return axios.post(`${domen}/authentication_token `, params, config)
+            return axios.post(`${domen}authentication_token `, params, config)
                 .then(response => {
                     console.log(response.data.token)
                     if (response.data.token) {
