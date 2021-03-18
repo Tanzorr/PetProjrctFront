@@ -47,7 +47,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                     <input className="form-control"
                            onChange={handleInputChange}
                            value={prod.img}
-                           type="text" placeholder="Enter image url" name="price" required/>
+                           type="text" placeholder="Enter image url" name="image" required/>
                 </div>
                 <div className="form-group">
                     <label><b>Categry</b></label>
