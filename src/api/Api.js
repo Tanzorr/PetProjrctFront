@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let domen = 'http://127.0.0.1:8000/';
+let domen = 'http://127.0.0.1:8001/';
 
 let currentUrl = window.location.href;
 
@@ -8,12 +8,12 @@ currentUrl = currentUrl.split('/')
 
 let currentDomen = currentUrl[2];
 
-if (currentDomen !== 'http://localhost:3000/') {
+if (currentDomen !== 'localhost:3000') {
     domen = 'https://evening-fjord-08596.herokuapp.com/'
 }
 
 console.log('curretUrl', currentDomen);
-console.log('remote api domen', currentDomen);
+console.log('remote api domen', domen);
 
 let config = {
     headers: {
@@ -140,7 +140,7 @@ const Api = {
 
     userLogout: () => {
         localStorage.removeItem("jwt_token");
-        //location.reload();
+        location.reload();
     },
 
 

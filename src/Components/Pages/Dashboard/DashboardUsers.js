@@ -7,10 +7,13 @@ import Api from "../../../api/Api";
 
 const DashboardProduct = (props) => {
     useEffect(() => {
-        if (Api.is_Longin.getJwtToken() === false) {
-            alert("not login");
-            props.history.push('/')
-        }
+        setTimeout(()=>{
+            if (Api.is_Longin.getJwtToken() === false) {
+                alert("not login");
+                props.history.push('/')
+            }
+        },1000)
+
     }, []);
     return <div className="container">
         <div className="row">
