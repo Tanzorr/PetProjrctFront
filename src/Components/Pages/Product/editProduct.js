@@ -70,7 +70,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                                 editProductSingle(productId, {
                                     name: prod.name,
                                     price: prod.price,
-                                    description: description,
+                                    description: prod.description,
                                     img: prod.img,
                                     category: prod.category,
                                 });
