@@ -69,6 +69,7 @@ const Api = {
     },
 
     addNew: (items = 'products', product = {}) => {
+        console.log('add Product', product);
         return fetch(`${domen}api/petshop/${items}/add`, {
             method: "POST",
             body: JSON.stringify(product)
@@ -77,10 +78,12 @@ const Api = {
     },
 
     updateItem: (items = 'product', id, product = {}) => {
-        alert("Put");
+
+        console.log('Product', product);
         return axios.put(`${domen}api/petshop/${items}/update/${id}`,
             {
-                product
+                method: "PUT",
+                body: JSON.stringify(product)
             }
         ).then(res => console.log("Updated", res))
     },

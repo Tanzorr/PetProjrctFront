@@ -14,7 +14,7 @@ const addProduct = ({...props, addProductSingle}) => {
 
     return <div className="container text-center">
         <div className="row">
-            <NavLink className="nav-link btn-lg btn-primary m-5 " to="/dashboard">Dashboard</NavLink>
+            <NavLink className="nav-link btn-lg btn-primary m-5 " to="/dashboardProd">Dashboard</NavLink>
         </div>
         <div>
             <div className="container">

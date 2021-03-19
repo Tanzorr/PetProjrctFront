@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {getSingleProduct, editProductSingle} from "../../../redux/product/product.reducer";
 import {NavLink} from "react-router-dom";
@@ -6,24 +6,24 @@ import {NavLink} from "react-router-dom";
 const editProduct = ({...props, product, getSingleProduct, editProductSingle}) => {
 
     let productId = props.match.params.id;
-    let [prod , setProduct] = useState( {})
+
 
     useEffect(() => {
-        getSingleProduct( productId);
+        getSingleProduct(productId);
         setProduct(product);
-        }, [productId]);
+    }, [productId]);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target
-        setProduct({ ...prod, [name]: value })
+        const {name, value} = event.target
+        setProduct({...prod, [name]: value})
     }
-    useEffect(()=>{
+    useEffect(() => {
         setProduct(product)
-    },[product])
+    }, [product])
 
     return <div className="container text-center">
         <div className="row">
-            <NavLink className="nav-link btn-lg btn-primary m-5 " to="/dashboard">Dashboard</NavLink>
+            <NavLink className="nav-link btn-lg btn-primary m-5 " to="/dashboardProd">Dashboard</NavLink>
         </div>
         <div>
             <div className="container">
@@ -31,7 +31,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                     <label htmlFor="uname"><b>Title</b></label>
                     <input className="form-control"
                            value={prod.name}
-                            id="titles"
+                           id="titles"
                            type="text" onChange={handleInputChange}
                            placeholder="product Title" name="name" required/>
                 </div>
@@ -47,14 +47,14 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                     <input className="form-control"
                            onChange={handleInputChange}
                            value={prod.img}
-                           type="text" placeholder="Enter image url" name="image" required/>
+                           type="text" placeholder="Enter image url" name="img" required/>
                 </div>
                 <div className="form-group">
                     <label><b>Categry</b></label>
                     <input className="form-control"
                            onChange={handleInputChange}
                            value={prod.category}
-                           type="text" placeholder="Enter products category" name="categry" required/>
+                           type="text" placeholder="Enter products category" name="category" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
@@ -65,11 +65,17 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
                 </div>
                 <div className="form-group">
                     <button className="ptn btn-success btn-lg"
-                            onClick={()=>{
-                                editProductSingle(productId,{
-                                    prod});
+                            onClick={() => {
+                                editProductSingle(productId, {
+                                    name: prod.name,
+                                    price: prod.price,
+                                    description: description,
+                                    img: prod.img,
+                                    category: prod.category,
+                                });
                             }}
-                    >Submit</button>
+                    >Submit
+                    </button>
                 </div>
             </div>
         </div>
@@ -77,7 +83,7 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
 }
 
 const mapStateToProps = (state) => {
-    return  { product: state.product.singleProduct}
+    return {product: state.product.singleProduct}
 };
 
 export default connect(mapStateToProps, {getSingleProduct, editProductSingle})(editProduct);
