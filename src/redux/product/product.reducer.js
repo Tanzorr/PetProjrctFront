@@ -20,6 +20,7 @@ const INITIAL_STATE = {
         price: 100,
         description: '',
         img: '',
+        uploead_file:''
     }
 }
 
