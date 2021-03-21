@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import {connect} from 'react-redux';
 import {addProductSingle} from "../../../redux/product/product.reducer";
 
 import {NavLink} from "react-router-dom";
+import Api from "../../../api/Api";
 
 const addProduct = ({...props, addProductSingle}) => {
     let [title, setTitle] = useState("");
@@ -11,6 +12,7 @@ const addProduct = ({...props, addProductSingle}) => {
     let [image, setImage] = useState("");
     let [category, setCategory] = useState("");
     let [description, setDescription] = useState("");
+    let [uploadFile, setUploadFile]= useState(null);
 
     return <div className="container text-center">
         <div className="row">
@@ -33,11 +35,24 @@ const addProduct = ({...props, addProductSingle}) => {
                            type="text" placeholder="Enter Price" name="price" required/>
                 </div>
                 <div className="form-group">
-                    <label><b>Image</b></label>
-                    <input className="form-control" onChange={(e) => {
-                        setImage(e.currentTarget.value)
-                    }}
-                           type="text" placeholder="Enter image url" name="price" required/>
+                    <input id='upload_file' name="File"
+                           onChange={(e)=>{
+                               let files = e.target.files || e.dataTransfer.files;
+                               if (!files.length)
+                               {
+                                   //console.log('no files', e.target.files);
+                                   console.log('no files');
+                               }
+
+                               let formData = new FormData();
+                               formData.append('File',files[0], files[0].name);
+                               formData.append('Product', files);
+
+                               setImage(files[0].name)
+                               setUploadFile(formData);
+
+                           }}
+                           type="file" name='image'/>
                 </div>
                 <div className="form-group">
                     <label><b>Categry</b></label>
@@ -62,9 +77,13 @@ const addProduct = ({...props, addProductSingle}) => {
                                     price,
                                     description,
                                     image,
-                                    category
+                                    category,
                                 });
-                                props.history.push('/dashboard')
+                                if(uploadFile){
+                                    Api.uploadFile(uploadFile);
+                                }
+
+                                props.history.push('/dashboardProd')
                             }}
                     >Submit
                     </button>
