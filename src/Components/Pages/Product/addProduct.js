@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import {Field, reduxForm} from 'redux-form'
+
 
 import {connect} from 'react-redux';
 import {addProductSingle} from "../../../redux/product/product.reducer";
@@ -6,91 +8,80 @@ import {addProductSingle} from "../../../redux/product/product.reducer";
 import {NavLink} from "react-router-dom";
 import Api from "../../../api/Api";
 
-const addProduct = ({...props, addProductSingle}) => {
-    let [title, setTitle] = useState("");
-    let [price, setPrice] = useState("");
+const addProduct = (props) => {
+    const {handleSubmit, pristine, reset, submitting, addProductSingle} = props
     let [image, setImage] = useState("");
-    let [category, setCategory] = useState("");
-    let [description, setDescription] = useState("");
-    let [uploadFile, setUploadFile]= useState(null);
+    let [uploadFile, setUploadFile] = useState(null);
+
+
+    const Submit = (values) => {
+        console.log('submit Values', values);
+        values.image = image
+        if (uploadFile) {
+            Api.uploadFile(uploadFile);
+        }
+        addProductSingle(values);
+        props.history.push('/dashboardProd')
+
+    }
 
     return <div className="container text-center">
         <div className="row">
             <NavLink className="nav-link btn-lg btn-primary m-5 " to="/dashboardProd">Dashboard</NavLink>
         </div>
         <div>
-            <div className="container">
+            <form onSubmit={handleSubmit(Submit)} className="container">
                 <div className="form-group">
                     <label htmlFor="uname"><b>Title</b></label>
-                    <input className="form-control"
-                           type="text" onChange={(e) => {
-                        setTitle(e.currentTarget.value)
-                    }} placeholder="product Title" name="title" required/>
+                    <Field name='title' component='input' type="text" placeholder="First Name"
+                           className="form-control"/>
                 </div>
+
                 <div className="form-group">
-                    <label><b>Price</b></label>
-                    <input className="form-control" onChange={(e) => {
-                        setPrice(e.currentTarget.value)
-                    }}
-                           type="text" placeholder="Enter Price" name="price" required/>
+                    <label htmlFor="price"><b>Price</b></label>
+                    <Field name='price' component='input' type="number" placeholder="Product Price"
+                           className="form-control"/>
                 </div>
+
                 <div className="form-group">
                     <input id='upload_file' name="File"
-                           onChange={(e)=>{
+                           onChange={(e) => {
                                let files = e.target.files || e.dataTransfer.files;
-                               if (!files.length)
-                               {
+                               if (!files.length) {
                                    //console.log('no files', e.target.files);
                                    console.log('no files');
                                }
 
                                let formData = new FormData();
-                               formData.append('File',files[0], files[0].name);
+                               formData.append('File', files[0], files[0].name);
                                formData.append('Product', files);
 
                                setImage(files[0].name)
                                setUploadFile(formData);
 
-                           }}
-                           type="file" name='image'/>
+                           }} type='file'/>
                 </div>
-                <div className="form-group">
-                    <label><b>Categry</b></label>
-                    <input className="form-control" onChange={(e) => {
-                        setCategory(e.currentTarget.value)
-                    }}
-                           type="text" placeholder="Enter products category" name="categry" required/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <textarea name="description" id="" cols="30" rows="10"
-                              onChange={(e) => {
-                                  setDescription(e.currentTarget.value)
-                              }}
-                              className="form-control" required ></textarea>
-                </div>
-                <div className="form-group">
-                    <button className="ptn btn-success btn-lg"
-                            onClick={() => {
-                                addProductSingle({
-                                    title,
-                                    price,
-                                    description,
-                                    image,
-                                    category,
-                                });
-                                if(uploadFile){
-                                    Api.uploadFile(uploadFile);
-                                }
 
-                                props.history.push('/dashboardProd')
-                            }}
-                    >Submit
+                <div className="form-group">
+                    <label htmlFor="category"><b>Category</b></label>
+                    <Field name='category' component='input' type="text" placeholder="Product Category"
+                           className="form-control"/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="description"><b>Description</b></label>
+                    <Field name='description' component='textarea'
+                           cols="30" rows="10" type="text" placeholder="Product description" className="form-control"/>
+                </div>
+                <div className="form-group">
+                    <button className="ptn btn-success btn-lg">Submit
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 }
 
-export default connect(null, {addProductSingle})(addProduct);
+export default connect(null, {addProductSingle})(reduxForm({
+    form: 'addProduct'
+})(addProduct));
