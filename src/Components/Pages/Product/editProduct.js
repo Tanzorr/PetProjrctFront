@@ -3,6 +3,9 @@ import {connect} from "react-redux";
 import {getSingleProduct, editProductSingle} from "../../../redux/product/product.reducer";
 import {NavLink} from "react-router-dom";
 
+import Form from "./Form/Form";
+
+
 const editProduct = ({...props, product, getSingleProduct, editProductSingle}) => {
 
     let productId = props.match.params.id;
@@ -12,74 +15,22 @@ const editProduct = ({...props, product, getSingleProduct, editProductSingle}) =
     useEffect(() => {
         getSingleProduct(productId);
         setProduct(product);
+        console.log('Product Edt ', product)
     }, [productId]);
 
     const handleInputChange = (event) => {
         const {name, value} = event.target
         setProduct({...prod, [name]: value})
     }
-    useEffect(() => {
-        setProduct(product)
-    }, [product])
+
 
     return <div className="container text-center">
         <div className="row">
             <NavLink className="nav-link btn-lg btn-primary m-5 " to="/dashboardProd">Dashboard</NavLink>
         </div>
-        <div>
-            <div className="container">
-                <div className="form-group">
-                    <label htmlFor="uname"><b>Title</b></label>
-                    <input className="form-control"
-                           value={prod.name}
-                           id="titles"
-                           type="text" onChange={handleInputChange}
-                           placeholder="product Title" name="name" required/>
-                </div>
-                <div className="form-group">
-                    <label><b>Price</b></label>
-                    <input className="form-control"
-                           onChange={handleInputChange}
-                           value={prod.price}
-                           type="text" placeholder="Enter Price" name="price" required/>
-                </div>
-                <div className="form-group">
-                    <label><b>Image</b></label>
-                    <input className="form-control"
-                           onChange={handleInputChange}
-                           value={prod.img}
-                           type="text" placeholder="Enter image url" name="img" required/>
-                </div>
-                <div className="form-group">
-                    <label><b>Categry</b></label>
-                    <input className="form-control"
-                           onChange={handleInputChange}
-                           value={prod.category}
-                           type="text" placeholder="Enter products category" name="category" required/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <textarea name="description" id="" cols="30" rows="10"
-                              value={prod.description}
-                              onChange={handleInputChange}
-                              className="form-control"></textarea>
-                </div>
-                <div className="form-group">
-                    <button className="ptn btn-success btn-lg"
-                            onClick={() => {
-                                editProductSingle(productId, {
-                                    name: prod.name,
-                                    price: prod.price,
-                                    description: prod.description,
-                                    img: prod.img,
-                                    category: prod.category,
-                                });
-                            }}
-                    >Submit
-                    </button>
-                </div>
-            </div>
-        </div>
+
+        <Form initialValues={product}/>
+
     </div>
 }
 
