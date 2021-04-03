@@ -23,7 +23,6 @@ const Register = ({...props, registerUser, handleSubmit}) => {
         }, 2000);
     }
 
-
     return <div className="container">
         <div className="alert-danger">{Errors[0]}</div>
         <div className="row justify-content-center m-5">
