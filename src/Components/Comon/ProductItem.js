@@ -1,13 +1,14 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import './comon.module.css'
+import Api from "../../api/Api";
 
 const ProductItem = ({product}) => {
     return <div className="product_item mb-5">
             <NavLink to={`/product/${product.id}`}>
                 <div className="row text-center item_img-block">
                     <img className="img-rounded w-100 item_img"
-                         src={product.img}
+                         src={`${Api.domen}/uploads/images/products/${product.img}`}
                          alt=""/>
                 </div>
                 <div className="row ">

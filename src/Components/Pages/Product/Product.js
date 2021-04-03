@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {getSingleProduct, getInCategoriesProducts} from "../../../redux/product/product.reducer";
 import CarouselP from "../../Carusel/CarouselP";
+import Api from "../../../api/Api";
 
 const Product = ({...props, product, products, getSingleProduct, getInCategoriesProducts}) => {
     let productId = props.match.params.id;
@@ -17,11 +18,10 @@ const Product = ({...props, product, products, getSingleProduct, getInCategories
     }, [product])
 
 
-    console.log('product', product, props)
     return <div className="container">
         <div className="row m-5">
             <div className="col-lg-6">
-                <img src={product.img} className="w-75" alt=""/>
+                <img src={`${Api.domen}/uploads/images/products/${product.img}`} className="w-75" alt=""/>
             </div>
             <div className="col-lg-6">
                 <div className="row">

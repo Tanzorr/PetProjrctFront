@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let domen = 'http://127.0.0.1:8001/';
+let domen = 'http://127.0.0.1:8000/';
 
 let currentUrl = window.location.href;
 
@@ -23,6 +23,8 @@ let config = {
 }
 
 const Api = {
+    domen: domen,
+
     getAll: (items = 'products') => {
         return fetch(`${domen}api/petshop/${items}`, config)
             .then(res => res.json())
@@ -40,7 +42,7 @@ const Api = {
     },
 
     getInCategories: (items = 'products', category) => {
-        console.log('category in dal', category);
+
         return fetch(`${domen}${items}/category/${category}`)
             .then(res => res.json())
             .then((json) => {
@@ -68,17 +70,25 @@ const Api = {
             .then(json => console.log(json))
     },
 
+    uploadFile: (files)=>{
+        return fetch(`${domen}api/petshop/product/upload`, {
+            method: "POST",
+            body: files
+        }).then(res => console.log('res', res))
+    },
+
     addNew: (items = 'products', product = {}) => {
-        console.log('add Product', product);
+
         return fetch(`${domen}api/petshop/${items}/add`, {
             method: "POST",
-            body: JSON.stringify(product)
-        }).then(res => console.log('res', res))
+            body: JSON.stringify( product)
+        }).then(res => console.log('res', res)).catch(error => {
+            console.log(error);
+        })
 
     },
 
     updateItem: (items = 'product', id, product = {}) => {
-
         console.log('Product', product);
         return axios.put(`${domen}api/petshop/${items}/update/${id}`,
             {
@@ -163,7 +173,9 @@ const Api = {
             }
 
         }
-    }
+    },
+
+
 
 
 }

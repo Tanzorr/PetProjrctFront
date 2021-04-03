@@ -2,68 +2,63 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {loginUser, registerUser} from "../../../redux/user/user.reducer";
 import Errors, {chekPassword} from "../../../front_validator/index.";
-import  { Redirect } from 'react-router-dom'
 
-const Register = ({...props,registerUser}) => {
+import {Field, reduxForm} from 'redux-form'
 
-    let [name, setName] = useState('');
-    let [email, setEmail] = useState('');
-    let [password1, setPassword1] = useState('');
-    let [password2, setPassword2] = useState('');
+const Register = ({...props, registerUser, handleSubmit}) => {
 
+    let save = (value) => {
+        chekPassword(value.password1, value.password2);
+        registerUser({
+            name: value.uname,
+            email: value.email,
+            password: value.password1
+        });
+        setTimeout(() => {
+            loginUser({
+                email: value.email,
+                password: value.password1
+            })
+            props.history.push('/dashboardUser')
+        }, 2000);
+    }
 
     return <div className="container">
         <div className="alert-danger">{Errors[0]}</div>
         <div className="row justify-content-center m-5">
-            <div className="container">
+            <form className="container" onSubmit={handleSubmit(save)}>
                 <div className="form-group">
                     <label htmlFor="uname"><b>Username</b></label>
-                    <input onChange={(e) => {
-                        setName(e.currentTarget.value)
-                    }} className="form-control"
+                    <Field className="form-control"
+                           component='input'
                            type="text" placeholder="Enter Username" name="uname" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="uname"><b>Email</b></label>
-                    <input className="form-control" onChange={(e) => {
-                        setEmail(e.currentTarget.value)
-                    }}
-                           type="email" placeholder="Enter Email" name="uname" required/>
+                    <Field className="form-control"
+                           type="email" component='input' placeholder="Enter Email" name="email" required/>
                 </div>
                 <div className="form-group">
                     <label><b>Password</b></label>
-                    <input className="form-control" onChange={(e) => {
-                        setPassword1(e.currentTarget.value)
-                    }}
-                           type="password" placeholder="Enter Password" name="psw" required/>
+                    <Field className="form-control" component='input'
+                           type="password" placeholder="Enter Password" name="password1" required/>
                 </div>
                 <div className="form-group">
                     <label><b>Password2</b></label>
-                    <input className="form-control" onChange={(e) => {
-                        setPassword2(e.currentTarget.value)
-                    }}
-                           type="password" placeholder="Enter Password" name="psw2" required/>
+                    <Field className="form-control" component='input'
+                           type="password" placeholder="Enter Password" name="password2" required/>
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-success" onClick={() => {
-                        chekPassword(password1, password2);
-                        registerUser({
-                            name,
-                            email,
-                            password: password1
-                        });
-                        setTimeout(()=>{
-                            loginUser({email,password1})
-                            props.history.push('/dashboardUser')
-                        },2000)
-
-                    }} type="submit">Register
+                    <button className="btn btn-success" type="submit">Register
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>;
 
 }
 
-export default connect(null, {registerUser, loginUser })(Register);
+export default connect(null, {registerUser, loginUser})(reduxForm({
+    form: 'Register',
+    enableReinitialize: true
+})(Register));

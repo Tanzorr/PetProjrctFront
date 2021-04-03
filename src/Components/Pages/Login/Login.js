@@ -1,52 +1,51 @@
 import React, {useState} from 'react';
 import Api from "../../../api/Api";
-import  { Redirect } from 'react-router-dom'
+import {Field, reduxForm} from 'redux-form'
 
-const Login = (props) => {
-    let [email, setEmail]= useState("");
-    let [password, setPassword]= useState("");
+const Login = ({handleSubmit, history}) => {
 
+    let save = (value) => {
+        Api.loginUser.getJwtToken({
+            email: value.email,
+            password: value.password
+        });
+        history.push('/dashboardUser')
+    }
 
-    return <div className="container">
+    return <form className="container" onSubmit={handleSubmit(save)}>
         <div className="row justify-content-center m-5">
 
-                <div className="row justify-content-center">
-                    <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="Avatar"
-                         width="100" className="avatar"/>
+            <div className="row justify-content-center">
+                <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="Avatar"
+                     width="100" className="avatar"/>
+            </div>
+            <div className="container">
+                <div className="form-group">
+                    <label htmlFor="email"><b>Email</b></label>
+                    <Field className="form-control" component='input'
+                           type="email" placeholder="Enter Username" name="email" required/>
                 </div>
-                <div className="container">
-                    <div className="form-group">
-                        <label htmlFor="email"><b>Emaul</b></label>
-                        <input className="form-control" onChange={(e)=>{setEmail(e.target.value)}}
-                               type="email" placeholder="Enter Username" name="email" required/>
-                    </div>
-                    <div className="form-group">
-                        <label><b>Password</b></label>
-                        <input className="form-control" onChange={(e)=>{setPassword(e.target.value)}}
-                               type="password" placeholder="Enter Password" name="psw" required/>
-                    </div>
-                    <div className="form-group">
-                        <button onClick={
-                            ()=>{
-                                Api.loginUser.getJwtToken({
-                                    email,
-                                    password
-                                });
-                                props.history.push('/dashboardUser')
-
-                            }
-                        } className="btn btn-success" type="submit">Login</button>
-                    </div>
+                <div className="form-group">
+                    <label><b>Password</b></label>
+                    <Field className="form-control" component='input'
+                           type="password" placeholder="Enter Password" name="password" required/>
                 </div>
-                <div className="container">
-                    <button type="button"
-                            className="cancelbtn btn btn-primary mr-3">Cancel
+                <div className="form-group">
+                    <button className="btn btn-success" type="submit">Login
                     </button>
-                    <span className="psw">Forgot <a href="#">password?</a></span>
                 </div>
-
+            </div>
+            <div className="container">
+                <button type="button"
+                        className="cancelbtn btn btn-primary mr-3">Cancel
+                </button>
+                <span className="psw">Forgot <a href="#">password?</a></span>
+            </div>
         </div>
-    </div>;
+    </form>;
 };
 
-export default Login;
+export default reduxForm({
+    form: 'Login',
+    enableReinitialize: true
+})(Login);
