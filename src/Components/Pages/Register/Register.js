@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {loginUser, registerUser} from "../../../redux/user/user.reducer";
 import Errors, {chekPassword} from "../../../front_validator/index.";

@@ -15,7 +15,6 @@ const addProduct = (props) => {
 
 
     const Submit = (values) => {
-        console.log('submit Values', values);
         values.image = image
         if (uploadFile) {
             Api.uploadFile(uploadFile);

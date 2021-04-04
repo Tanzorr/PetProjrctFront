@@ -12,8 +12,6 @@ if (currentDomen !== 'localhost:3000') {
     domen = 'https://evening-fjord-08596.herokuapp.com/'
 }
 
-console.log('curretUrl', currentDomen);
-console.log('remote api domen', domen);
 
 let config = {
     headers: {
@@ -119,9 +117,6 @@ const Api = {
                 () =>{
                     console.log('login after register')
                     Api.loginUser.getJwtToken(params)
-                    // setTimeout(()=>{
-                    //     location.reload()
-                    // },2000);
                 }
             ).catch(error => {
                 console.log(error);
@@ -171,12 +166,8 @@ const Api = {
             } else {
                 return false;
             }
-
         }
     },
-
-
-
 
 }
 
@@ -184,11 +175,5 @@ const getJwtTocken = () => {
 
 }
 
-// let getProducts = async ()=>{
-//     let products = await Api.getAll('products');
-//     return products;
-// }
-//
-// console.log('api_p', getProducts());
 
 export default Api;

@@ -1,16 +1,21 @@
 import React, {useEffect} from "react";
 import AdminAsade from "./AdminAsade";
-import UsersTable from "./usersTable";
+import ReadOnlyTable from "./readOnlyTable";
 import Api from "../../../api/Api";
+import {connect} from 'react-redux';
+import {getUsers} from '../../../redux/user/user.reducer';
 
 
 
-const DashboardProduct = (props) => {
+const DashboardProduct = ({history,  getUsers, users}) => {
+    useEffect(()=>{
+        getUsers();
+    },[]);
     useEffect(() => {
         setTimeout(()=>{
             if (Api.is_Longin.getJwtToken() === false) {
                 alert("not login");
-                props.history.push('/')
+                history.push('/')
             }
         },1000)
 
@@ -24,12 +29,16 @@ const DashboardProduct = (props) => {
                 <AdminAsade/>
             </div>
             <div className="col-lg-10">
-                <UsersTable/>
+                <ReadOnlyTable items={users}/>
             </div>
         </div>
     </div>
-
-
 };
 
-export default DashboardProduct;
+
+const mapStateToProps = state =>({
+    users:state.user.users
+});
+
+
+export default connect(mapStateToProps,{getUsers})(DashboardProduct);

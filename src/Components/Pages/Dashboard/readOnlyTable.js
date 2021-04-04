@@ -1,18 +1,14 @@
-import React,{useEffect} from 'react';
-import {connect} from 'react-redux';
-import {getUsers} from '../../../redux/user/user.reducer';
+import React from 'react';
+
 import TdURow from "./TdUrow";
 
 
 
-const UsersTable=({users, getUsers})=>{
-    useEffect(()=>{
-       getUsers();
-    },[]);
-    console.log('usesP', users);
+const ReadOnlyTable=({items})=>{
+
     let usersList=[];
-    if (users.length){
-        usersList = users.map((e, i)=>{
+    if (items.length){
+        usersList = items.map((e, i)=>{
             return <TdURow key={i} user={e}/>
         });
     }else{
@@ -36,8 +32,4 @@ const UsersTable=({users, getUsers})=>{
     </div>
 }
 
-const mapStateToProps = state =>({
-    users:state.user.users
-});
-
-export default connect(mapStateToProps,{getUsers})(UsersTable);
+export default ReadOnlyTable;

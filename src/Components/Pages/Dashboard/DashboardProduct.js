@@ -1,32 +1,44 @@
-import React, {useEffect} from "react";
+import React, {useEffect} from 'react';
+import ProductItem from '../../Comon/ProductItem';
+import {connect} from 'react-redux';
+import {getAllProduct} from "../../../redux/product/product.reducer";
 import AdminAsade from "./AdminAsade";
-import ProductTable from "./productsTable";
-import Api from "../../../api/Api";
-import {Redirect} from "react-router";
+import ControlTable from "./controlTable";
 
 
-const DashboardProduct = (props) => {
+const Catalog = ({getAllProduct, products}) => {
     useEffect(() => {
-        if (Api.is_Longin.getJwtToken() === false) {
-            alert("not login");
-            props.history.push('/')
-        }
-    }, []);
+        getAllProduct();
+    }, [])
+
+    // let productList = [];
+    // if (products && products.length) {
+    //     productList = products.map((e, i) => {
+    //         return <div className="col-lg-3">
+    //             <ProductItem key={i} product={e}/>
+    //         </div>;
+    //     });
+    // } else {
+    //     productList = `<h1> Have no Product</h1> `;
+    // }
+
+
     return <div className="container">
-        <div className="row">
-            <h2>Hello Admin</h2>
-        </div>
         <div className="row">
             <div className="col-lg-2">
                 <AdminAsade/>
             </div>
             <div className="col-lg-10">
-                <ProductTable/>
+                <div className="row">
+                    <ControlTable items={products}/>
+                </div>
             </div>
         </div>
-    </div>
-
-
+    </div>;
 };
 
-export default DashboardProduct;
+const mapStateToProps = state => ({
+    products: state.product.products,
+});
+
+export default connect(mapStateToProps, {getAllProduct})(Catalog);
