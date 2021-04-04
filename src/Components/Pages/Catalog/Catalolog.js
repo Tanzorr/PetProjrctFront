@@ -11,8 +11,6 @@ const Catalog =({...props, getAllProduct, getAllCategories,getInCategoriesProduc
     getAllCategories();
   },[])
 
-console.log('products', products);
-console.log('categories', props);
   let productList=[];
   if (products && products.length) {
     productList = products.map((e, i) => {

@@ -16,7 +16,7 @@ const INITIAL_STATE = {
 }
 
 let userReducer = (state = INITIAL_STATE, action) => {
-    console.log('action', action.payload);
+
     switch (action.type) {
         case UserActionTypes.SET_USER:
             return {
@@ -29,7 +29,7 @@ let userReducer = (state = INITIAL_STATE, action) => {
                 users: action.payload
             }
         case UserActionTypes.IS_AUTH:
-            console.log('is auth', action);
+
             return {
                 ...state,
                 authUser: action.payload
@@ -51,7 +51,6 @@ export const registerUser = (user) => {
     return async (dispatch) => {
         await Api.registerUser(user);
         await dispatch(addUserAC(user));
-        await is_Auth();
     }
 }
 

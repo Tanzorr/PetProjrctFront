@@ -20,13 +20,15 @@ const INITIAL_STATE = {
         price: 100,
         description: '',
         img: '',
+        uploead_file:''
     }
 }
 
 const productReducer = (state = INITIAL_STATE, action) => {
-    console.log('action', action);
+
     switch (action.type) {
         case ProductActionTypes.GET_ALL_PRODUCTS:
+            console.log('action in r', action.payload);
             return {
                 ...state,
                 products: action.payload

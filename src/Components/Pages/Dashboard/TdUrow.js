@@ -8,7 +8,6 @@ const TdURow = ({user}) => {
         <td>{user.username}</td>
         <td>{user.email}</td>
         <td>{user.roles}</td>
-
     </tr>
 
 }
